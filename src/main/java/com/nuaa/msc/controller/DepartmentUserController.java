@@ -25,6 +25,13 @@ public class DepartmentUserController {
         return departmentUserService.listAll(page, size);
     }
 
+    @GetMapping("/getAllDepartmentUserDao")
+    @ApiOperation(value = "查询全部")
+    public Object getAllDepartmentUserDao(@RequestParam(value = "page", defaultValue = "1") int page,
+                          @RequestParam(value = "size", defaultValue = "10") int size) {
+        return departmentUserService.getAllDepartmentUserDao(page, size);
+    }
+
     @ApiOperation(value = "添加部门-人员关系表")
     @PostMapping("/insert")
     public int insert(@RequestBody InsertDepartmentUserDao insertDepartmentUserDao) {
@@ -41,5 +48,11 @@ public class DepartmentUserController {
     @ApiOperation(value = "修改部门-人员关系表")
     public int update(@RequestBody DepartmentUser departmentUser) {
         return departmentUserService.update(departmentUser);
+    }
+
+    @ApiOperation(value = "通过部门ID获得本部门下所有人id和职位")
+    @PostMapping("/listAllDepartmentUserBydepartmentId")
+    public Object listAllDepartmentUserBydepartmentId(Integer departmentId) {
+        return departmentUserService.listAllDepartmentUserBydepartmentId(departmentId);
     }
 }

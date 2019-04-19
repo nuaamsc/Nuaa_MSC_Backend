@@ -3,6 +3,7 @@ package com.nuaa.msc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.nuaa.msc.bean.Dao.GetAllDepartmentUserDao;
 import com.nuaa.msc.bean.DepartmentUser;
 import com.nuaa.msc.bean.Dao.InsertDepartmentUserDao;
 import com.nuaa.msc.mapper.DepartmentUserMapper;
@@ -27,6 +28,14 @@ public class DepartmentUserServiceImpl implements DepartmentUserService {
     }
 
     @Override
+    public Object getAllDepartmentUserDao(int page, int size) {
+        PageHelper.startPage(page, size);
+        List<GetAllDepartmentUserDao> departmentUsersList = departmentUserMapper.getAllDepartmentUser();
+        PageInfo<GetAllDepartmentUserDao> pageInfo = new PageInfo<>(departmentUsersList);
+        return pageInfo;
+    }
+
+    @Override
     public int insert(InsertDepartmentUserDao insertDepartmentUserDao) {
         return departmentUserMapper.insert(insertDepartmentUserDao);
     }
@@ -41,5 +50,11 @@ public class DepartmentUserServiceImpl implements DepartmentUserService {
     public int update(DepartmentUser departmentUser) {
         return departmentUserMapper.update(departmentUser);
     }
+
+    @Override
+    public Object listAllDepartmentUserBydepartmentId(Integer departmentId) {
+        return departmentUserMapper.listAllDepartmentUserBydepartmentId(departmentId);
+    }
+
 }
 
